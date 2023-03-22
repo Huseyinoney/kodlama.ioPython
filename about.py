@@ -1,41 +1,30 @@
 #python veri tipleri
 
 PYTHON’DA VERİ TİPLERİ
-Python programlama dilinde; Numeric (Sayısal), Sequence (Sıralı), Boolean (Mantıksal), Set(Takım), Dictionary (Sözlük) ve Binary (İkili) olmak üzere 6 ana veri tipi bulunmaktadır. 
+Python programlama dilinde; Numeric (Sayısal), Sequence (Sıralı), Boolean (Mantıksal),  Dictionary (Sözlük) ve Binary (İkili) olmak üzere 6 ana veri tipi bulunmaktadır. 
 -Numeric veri tipi integer (tam ), floar (ondalıklı) ve Complex (karmaşık) sayılardan oluşur. 
 -Sequence veri tipi ise string (metin), list(liste) ve tuple(demet) yapılarında oluşur.
 -Boolean veri tipinde sadece bir yapı bulunur. Bu yapıda mantık kurarken true yada false yapılarını tutar.
--Son olarak set veri tipi ise tektir. Sıralı olmayan, elemanı arttırılabilen ama ikinci kez tekrar etmeyen verileri oluşturmayı sağlar.
+
+
+mailBase = ""
+passwordBase= ""
+
+mail = input("Lütfen mail adresinizi giriniz: ")
+password = input("Lütfen şifrenizi giriniz: ")
+
+if mail == (mailBase) and password == (passwordBase):
+    print("Giriş yapıldı.")
+else:
+    print("Mail veya şifre yanlış.")
 
 
 
 
-mailadress = ""
-şifre = ""
-kullanıcıadı = input("Kullanıcı Adı : ")
-şifre  =  input( "Şifre : " )
+courses = []
 
-if mailadress == kullanıcıadı and şifre == şifre : 
-     print("Giriş Başarılı")
-elif mailadress != kullanıcıadı and şifre == şifre :
-     print("Kullanıcı Adı Hatalı")
-elif mailadress == kullanıcıadı and şifre != şifre :
-     print("Şifre Hatalı")
-else :
-   print("Kullanıcı Adı ve Şifre Hatalı")
-
-KursaKayıt = mailadress == kullanıcıadı and şifre == şifre 
-if KursaKayıt :
-    KursaKayıt = True 
-    print("Kursa Başarıyla Kayıt Oldunuz.")
-else : 
-    KursaKayıt = False 
-    print("İçeriği Görmek İçin Kayıt Olun ve Giriş Yapın.")
-       
-kurslar = [" 2023 Java Yazılım Geliştirme Yetiştirme Kampı", "Pyhton&Selenium Geliştirme Yetiştirme Kampı"]
-öğretmenler = ["Engin Demirog", "Halit Kalaycı"]
-
-if mailadress == kullanıcıadı and şifre == şifre :
-    KursaKayıt = True
-    print (kurslar)
-    print(öğretmenler)
+course = input("katılmak istediğiniz kursun ismini giriniz")
+if course:
+     courses.append(course)
+else:
+     print("geçerli bir kurs ismi girmediniz")
