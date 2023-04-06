@@ -9,6 +9,7 @@ import pytest
 from pathlib import Path
 from datetime import date
 import time
+from constants import globalConstant
 
 
 
@@ -16,7 +17,7 @@ class Test_Sauce:
     def setup_method(self):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.maximize_window()
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.get(globalConstant.base_URL)
         self.folderPath = str(date.today())
         Path(self.folderPath).mkdir(exist_ok=True)
 
@@ -28,13 +29,13 @@ class Test_Sauce:
         loginBtn = self.driver.find_element(By.ID, 'login-button')
         loginBtn.click()
 
-        self.waitForElementVisible((By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3'))
+        self.waitForElementVisible((By.XPATH, globalConstant.loginButtonContainer))
 
-        errorMessage = self.driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
+        errorMessage = self.driver.find_element(By.XPATH, globalConstant.loginButtonContainer)
 
         self.driver.save_screenshot(f"{self.folderPath}/test-empty-login.png")
 
-        assert errorMessage.text == "Epic sadface: Username is required"
+        assert errorMessage.text == globalConstant.testUserNameNullErrorMessage
 
     @pytest.mark.parametrize("username", ["42", "standard_user", "problem_user"])
     def test_password_login(self, username):
@@ -47,11 +48,11 @@ class Test_Sauce:
         loginBtn = self.driver.find_element(By.ID, 'login-button')
         loginBtn.click()
 
-        errorMessage = self.driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
+        errorMessage = self.driver.find_element(By.XPATH, globalConstant.loginButtonContainer)
 
         self.driver.save_screenshot(f"{self.folderPath}/test-empty-password-{username}-login.png")
 
-        assert errorMessage.text == 'Epic sadface: Password is required'
+        assert errorMessage.text == globalConstant.testPasswordNullErrorMessage
 
     def test_invalid_login(self):
         self.waitForElementVisible((By.ID, 'user-name'))
@@ -66,11 +67,11 @@ class Test_Sauce:
         actions.send_keys_to_element(loginBtn, Keys.ENTER)
         actions.perform()
 
-        errorMessage = self.driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
+        errorMessage = self.driver.find_element(By.XPATH, globalConstant.loginButtonContainer)
 
         self.driver.save_screenshot(f"{self.folderPath}/test-invalid-login.png")
 
-        assert errorMessage.text == 'Epic sadface: Sorry, this user has been locked out.'
+        assert errorMessage.text == globalConstant.testInvalidLoginErrorMessage
 
     
 
@@ -108,11 +109,11 @@ class Test_Sauce:
         actions.send_keys_to_element(loginBtn, Keys.ENTER)
         actions.perform()
 
-        errorMessage = self.driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
+        errorMessage = self.driver.find_element(By.XPATH, globalConstant.loginButtonContainer)
 
         self.driver.save_screenshot(f"{self.folderPath}/test-wrong-password-{username}-{password}-login.png")
 
-        assert errorMessage.text == 'Epic sadface: Username and password do not match any user in this service'
+        assert errorMessage.text == globalConstant.testUserNameAndPasswordNotMatch
 
     def test_add(self):
         self.waitForElementVisible((By.ID, 'user-name'))
